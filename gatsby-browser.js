@@ -10,3 +10,4 @@ import "typeface-merriweather"
 import "prismjs/themes/prism.css"
 
 import "./src/tailwind.css"
+import "./src/global.css"
