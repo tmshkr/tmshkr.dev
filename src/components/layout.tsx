@@ -24,7 +24,7 @@ const Layout = ({ location, title, children }) => {
   return (
     <div className="max-w-2xl m-auto p-4 md:p-0" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
-      <main>{children}</main>
+      <main className="mt-4">{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
