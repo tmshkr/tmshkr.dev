@@ -119,5 +119,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-postcss",
+    "gatsby-plugin-root-import",
   ],
 }
