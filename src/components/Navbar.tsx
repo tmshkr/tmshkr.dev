@@ -1,25 +1,29 @@
 import * as React from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
+import { Link } from "gatsby"
 
 declare var window: any
 
 const activeItemClasses =
-  "border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+  "border-indigo-200 text-gray-900 border-b-2 font-medium no-underline"
 const inactiveItemClasses =
-  "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+  "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 border-b-2 font-medium no-underline"
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-white dark:bg-black">
+    <Disclosure as="nav">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto px-4 md:px-0">
             <div className="flex justify-between h-16">
-              <div className="flex">
-                <div className="flex-shrink-0 flex items-center">tmshkr</div>
+              <div className="flex items-center">
+                <Link to="/" className="text-gray-500 no-underline">
+                  tmshkr
+                </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+
                   <a href="#" className={activeItemClasses}>
                     About
                   </a>
@@ -34,10 +38,10 @@ export default function Navbar() {
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <button
                   type="button"
-                  className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="dark:bg-black p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <MoonIcon
-                    className="h-6 w-6"
+                    className="h-6 w-6 dark:fill-current"
                     aria-hidden="true"
                     onClick={() =>
                       window.__setPreferredTheme(
