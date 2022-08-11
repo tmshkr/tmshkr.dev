@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import Navbar from "./Navbar"
 declare const __PATH_PREFIX__: string
 
 const Layout = ({ location, title, children }) => {
@@ -23,6 +24,7 @@ const Layout = ({ location, title, children }) => {
 
   return (
     <div className="max-w-2xl m-auto p-4 md:p-0" data-is-root-path={isRootPath}>
+      <Navbar />
       <header className="global-header">{header}</header>
       <main className="mt-4">{children}</main>
       <footer>
