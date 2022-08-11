@@ -8,6 +8,8 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
     "gatsby": "^4.20.0",
     "gatsby-plugin-feed": "^4.20.0",
     "gatsby-plugin-image": "^2.20.0",
