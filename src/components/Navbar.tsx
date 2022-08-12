@@ -16,11 +16,21 @@ export default function Navbar() {
     <Disclosure as="nav">
       {({ open, close }) => {
         if (open) {
-          document.documentElement.style.cursor = "pointer"
-          if (typeof window !== "undefined") window.onclick = close
+          if (
+            typeof document !== "undefined" &&
+            typeof window !== "undefined"
+          ) {
+            document.documentElement.style.cursor = "pointer"
+            window.onclick = close
+          }
         } else {
-          if (typeof window !== "undefined") window.onclick = null
-          document.documentElement.style.cursor = null
+          if (
+            typeof document !== "undefined" &&
+            typeof window !== "undefined"
+          ) {
+            window.onclick = null
+            document.documentElement.style.cursor = null
+          }
         }
         return (
           <>
