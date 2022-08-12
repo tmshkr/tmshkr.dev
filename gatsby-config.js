@@ -120,5 +120,14 @@ module.exports = {
     },
     "gatsby-plugin-postcss",
     "gatsby-plugin-root-import",
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /\.svg$/,
+        },
+      },
+    },
+    `gatsby-plugin-sass`,
   ],
 }
