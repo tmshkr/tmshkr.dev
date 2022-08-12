@@ -16,21 +16,14 @@ export default function Navbar() {
     <Disclosure as="nav">
       {({ open, close }) => {
         if (open) {
-          if (
-            typeof document !== "undefined" &&
-            typeof window !== "undefined"
-          ) {
-            document.documentElement.style.cursor = "pointer"
-            window.onclick = close
-          }
-        } else {
-          if (
-            typeof document !== "undefined" &&
-            typeof window !== "undefined"
-          ) {
-            window.onclick = null
-            document.documentElement.style.cursor = null
-          }
+          document.documentElement.style.cursor = "pointer"
+          window.onclick = close
+        } else if (
+          typeof document !== "undefined" &&
+          typeof window !== "undefined"
+        ) {
+          window.onclick = null
+          document.documentElement.style.cursor = null
         }
         return (
           <>
@@ -73,18 +66,20 @@ export default function Navbar() {
                 {/* Mobile menu button */}
                 <Disclosure.Button
                   className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                  onClick={e => e.stopPropagation()}
+                  onClick={e => {
+                    e.stopPropagation()
+                    if (open) {
+                      window.__setPreferredTheme(
+                        window.__theme === "dark" ? "light" : "dark"
+                      )
+                    }
+                  }}
                 >
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <MoonIcon
                       className="h-6 w-6 dark:fill-current"
                       aria-hidden="true"
-                      onClick={() =>
-                        window.__setPreferredTheme(
-                          window.__theme === "dark" ? "light" : "dark"
-                        )
-                      }
                     />
                   ) : (
                     <MenuIcon className="block h-6 w-6" aria-hidden="true" />
