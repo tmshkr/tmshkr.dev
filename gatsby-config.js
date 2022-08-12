@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `tmshkr`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Tim Shaker`,
+      summary: `Tim Shaker is a full-stack engineer in Southern California`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `My portfolio/blog`,
+    siteUrl: `https://tmshkr.dev/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `tmshkr`,
     },
   },
   plugins: [
