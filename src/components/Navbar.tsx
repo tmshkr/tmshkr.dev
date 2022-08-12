@@ -4,6 +4,7 @@ import { MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
 import { Link } from "gatsby"
 
 declare var window: any
+declare var document: any
 
 const activeItemClasses =
   "border-indigo-200 text-gray-900 border-b-2 font-medium no-underline"
@@ -15,9 +16,11 @@ export default function Navbar() {
     <Disclosure as="nav">
       {({ open, close }) => {
         if (open) {
+          document.documentElement.style.cursor = "pointer"
           window.onclick = close
         } else {
           window.onclick = null
+          document.documentElement.style.cursor = null
         }
         return (
           <>
