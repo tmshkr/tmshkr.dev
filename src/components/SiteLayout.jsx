@@ -10,7 +10,6 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       <div className="max-w-2xl m-auto p-4 md:p-0">
-        {/* <header className="global-header">{header}</header> */}
         <main className="mt-4">{children}</main>
         <footer className="text-center mx-auto child:p-1 child:fill-stone-400 child-hover:fill-stone-500">
           <a
