@@ -17,9 +17,9 @@ export default function Navbar() {
       {({ open, close }) => {
         if (open) {
           document.documentElement.style.cursor = "pointer"
-          window.onclick = close
+          if (typeof window !== "undefined") window.onclick = close
         } else {
-          window.onclick = null
+          if (typeof window !== "undefined") window.onclick = null
           document.documentElement.style.cursor = null
         }
         return (
