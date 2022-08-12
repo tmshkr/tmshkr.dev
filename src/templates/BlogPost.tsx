@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "components/SiteLayout"
 import Seo from "components/seo"
+import * as styles from "./BlogPost.module.scss"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
@@ -13,7 +14,7 @@ const BlogPostTemplate = ({
   return (
     <Layout location={location} title={siteTitle}>
       <article
-        className="blog-post"
+        className={styles.blogPost}
         itemScope
         itemType="http://schema.org/Article"
       >

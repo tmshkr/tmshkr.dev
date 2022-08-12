@@ -50,15 +50,15 @@ export default function Navbar() {
                 <button
                   type="button"
                   className="dark:bg-black p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() =>
+                    window.__setPreferredTheme(
+                      window.__theme === "dark" ? "light" : "dark"
+                    )
+                  }
                 >
                   <MoonIcon
                     className="h-6 w-6 dark:fill-current"
                     aria-hidden="true"
-                    onClick={() =>
-                      window.__setPreferredTheme(
-                        window.__theme === "dark" ? "light" : "dark"
-                      )
-                    }
                   />
                 </button>
               </div>

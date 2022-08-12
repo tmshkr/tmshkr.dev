@@ -12,6 +12,7 @@
 
   p {
     margin: revert;
+    @apply text-slate-500 dark:text-slate-400;
   }
 
   h1,
@@ -21,7 +22,7 @@
   h5,
   h6 {
     margin: revert;
-    @apply font-sans;
+    @apply font-sans text-slate-900 dark:text-white;
   }
 
   h1 {
@@ -32,9 +33,6 @@
   }
   h3 {
     @apply text-lg;
-  }
-  a {
-    @apply text-blue-600 underline;
   }
 
   blockquote {

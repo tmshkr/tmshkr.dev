@@ -15,7 +15,7 @@ export default function HTML(props) {
       </head>
       <body
         {...props.bodyAttributes}
-        className="bg-white dark:bg-black dark:text-white"
+        className="bg-white dark:bg-slate-800 dark:text-white"
       >
         <script
           dangerouslySetInnerHTML={{
