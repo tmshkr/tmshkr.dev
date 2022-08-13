@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   siteMetadata: {
     title: `tmshkr`,
     author: {
@@ -80,3 +80,15 @@ module.exports = {
     `gatsby-plugin-emotion`,
   ],
 }
+
+if (process.env.NODE_ENV === "development") {
+  config.plugins.push({
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${__dirname}/drafts/blog`,
+      name: `drafts`,
+    },
+  })
+}
+
+module.exports = config

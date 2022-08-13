@@ -2,7 +2,7 @@ import * as React from "react"
 import Navbar from "./Navbar"
 import LinkedIn from "@fortawesome/fontawesome-free/svgs/brands/linkedin.svg"
 import GitHub from "@fortawesome/fontawesome-free/svgs/brands/github.svg"
-import Hashnode from "@fortawesome/fontawesome-free/svgs/brands/hashnode.svg"
+import At from "@fortawesome/fontawesome-free/svgs/solid/at.svg"
 import "./SiteLayout.scss"
 
 const Layout = ({ children }) => {
@@ -29,12 +29,12 @@ const Layout = ({ children }) => {
             <GitHub />
           </a>
           <a
-            href="https://hashnode.com/@tmshkr"
-            title="Hashnode"
+            href="mailto:tim@tmshkr.com"
+            title="Email"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Hashnode />
+            <At />
           </a>
         </footer>
       </div>
