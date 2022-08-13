@@ -6,10 +6,14 @@ import { Link } from "gatsby"
 declare var window: any
 declare var document: any
 
+const toggleTheme = () => {
+  window.__setPreferredTheme(window.__theme === "dark" ? "light" : "dark")
+}
+
 const activeItemClasses =
-  "border-indigo-200 text-gray-900 border-b-2 font-medium no-underline"
+  "border-indigo-200 text-gray-900 dark:text-gray-300 border-b-2 font-medium no-underline"
 const inactiveItemClasses =
-  "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 border-b-2 font-medium no-underline"
+  "border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 hover:text-gray-700 border-b-2 font-medium no-underline"
 
 export default function Navbar() {
   return (
@@ -29,7 +33,10 @@ export default function Navbar() {
           <>
             <div className="max-w-2xl mx-auto px-4 md:px-0 flex justify-between h-16">
               <div className="flex items-center">
-                <Link to="/" className="text-gray-500 no-underline">
+                <Link
+                  to="/"
+                  className="text-gray-500 dark:text-gray-400 no-underline"
+                >
                   tmshkr
                 </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -49,12 +56,8 @@ export default function Navbar() {
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <button
                   type="button"
-                  className="dark:bg-black p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() =>
-                    window.__setPreferredTheme(
-                      window.__theme === "dark" ? "light" : "dark"
-                    )
-                  }
+                  className="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={toggleTheme}
                 >
                   <MoonIcon
                     className="h-6 w-6 dark:fill-current"
@@ -65,14 +68,10 @@ export default function Navbar() {
               <div className="-mr-2 flex items-center sm:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                   onClick={e => {
                     e.stopPropagation()
-                    if (open) {
-                      window.__setPreferredTheme(
-                        window.__theme === "dark" ? "light" : "dark"
-                      )
-                    }
+                    if (open) toggleTheme()
                   }}
                 >
                   <span className="sr-only">Open main menu</span>
@@ -94,21 +93,21 @@ export default function Navbar() {
                 <Disclosure.Button
                   as="a"
                   href="#"
-                  className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  className="bg-indigo-50 dark:bg-slate-500 border-indigo-500 text-indigo-700 dark:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
                   About
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
-                  className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
                   Blog
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
-                  className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                  className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
                   Projects
                 </Disclosure.Button>
