@@ -32,8 +32,7 @@ async function createCollection(graphql, createPage, component, slug) {
   const result = await graphql(generateQuery(slug))
 
   if (result.errors) {
-    reporter.panicOnBuild(`There was an error querying the data`, result.errors)
-    return
+    throw result.errors
   }
 
   const posts = result.data.allMdx.nodes
@@ -64,9 +63,9 @@ async function createCollection(graphql, createPage, component, slug) {
 
 async function createPaginatedIndex(graphql, createPage, component, slug) {
   const result = await graphql(generateQuery(slug))
+
   if (result.errors) {
-    reporter.panicOnBuild(`There was an error querying the data`, result.errors)
-    return
+    throw result.errors
   }
 
   const posts = result.data.allMdx.nodes
@@ -74,9 +73,21 @@ async function createPaginatedIndex(graphql, createPage, component, slug) {
   const postsPerPage = 5
   const numPages = Math.ceil(posts.length / postsPerPage)
 
+  createPage({
+    path: `/${slug}`,
+    component,
+    context: {
+      limit: postsPerPage,
+      skip: 0,
+      numPages,
+      currentPage: 1,
+      glob: `/${slug}/*/`,
+    },
+  })
+
   for (let i = 0; i < numPages; i++) {
     createPage({
-      path: i === 0 ? `/${slug}` : `/${slug}/${i + 1}`,
+      path: `/${slug}/${i + 1}`,
       component,
       context: {
         limit: postsPerPage,
