@@ -1,61 +1,64 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+const blogPostsQuery = `
+query BlogPosts {
+  allMdx(
+    filter: {fields: {slug: {glob: "/blog/*/"}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+    limit: 1000
+  ) {
+    nodes {
+      id
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
+  }
+}`
+
+const projectQuery = `
+query Projects {
+  allMdx(
+    filter: {fields: {slug: {glob: "/projects/*/"}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+  ) {
+    nodes {
+      id
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
+  }
+}`
+
+const topLevelQuery = `
+query TopLevelPages {
+  allMdx(filter: {fields: {slug: {glob: "/*/"}}}) {
+    nodes {
+      id
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
+  }
+}`
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
   const Post = path.resolve(`./src/templates/Post.tsx`)
 
-  // Get all markdown blog posts sorted by date
-  const result = await graphql(
-    `
-      {
-        allMdx(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    `
-  )
-
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    )
-    return
-  }
-
-  const posts = result.data.allMdx.nodes
-
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
-      createPage({
-        path: post.fields.slug,
-        component: Post,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  }
+  await createCollection(graphql, createPage, Post, blogPostsQuery)
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -68,6 +71,47 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `slug`,
       node,
       value,
+    })
+  }
+}
+
+async function createCollection(
+  graphql,
+  createPage,
+  component,
+  query,
+  includeAdjacent = true
+) {
+  const result = await graphql(query)
+
+  if (result.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      result.errors
+    )
+    return
+  }
+
+  const posts = result.data.allMdx.nodes
+
+  if (posts.length > 0) {
+    posts.forEach((post, index) => {
+      let previousPostId
+      let nextPostId
+      if (includeAdjacent) {
+        previousPostId = index === 0 ? null : posts[index - 1].id
+        nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      }
+
+      createPage({
+        path: post.fields.slug,
+        component,
+        context: {
+          id: post.id,
+          previousPostId,
+          nextPostId,
+        },
+      })
     })
   }
 }

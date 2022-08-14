@@ -20,8 +20,8 @@ const config = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/blog`,
-        name: `blog`,
+        path: `${__dirname}/content`,
+        name: `content`,
       },
     },
     {
@@ -89,7 +89,7 @@ if (process.env.NODE_ENV === "development") {
   config.plugins.push({
     resolve: `gatsby-source-filesystem`,
     options: {
-      path: `${__dirname}/drafts/blog`,
+      path: `${__dirname}/drafts`,
       name: `drafts`,
     },
   })
