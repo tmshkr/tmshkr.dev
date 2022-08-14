@@ -4,58 +4,14 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
-  const BlogPost = path.resolve(`./src/templates/BlogPost.tsx`)
+  const Post = path.resolve(`./src/templates/Post.tsx`)
+  const PostIndex = path.resolve(`./src/templates/PostIndex.tsx`)
 
-  // Get all markdown blog posts sorted by date
-  const result = await graphql(
-    `
-      {
-        allMdx(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    `
-  )
-
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    )
-    return
-  }
-
-  const posts = result.data.allMdx.nodes
-
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
-      createPage({
-        path: post.fields.slug,
-        component: BlogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  }
+  await createCollection(graphql, createPage, Post, "blog")
+  await createCollection(graphql, createPage, Post, "projects")
+  await createCollection(graphql, createPage, Post)
+  await createPaginatedIndex(graphql, createPage, PostIndex, "blog")
+  await createPaginatedIndex(graphql, createPage, PostIndex, "projects")
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -70,4 +26,98 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+}
+
+async function createCollection(graphql, createPage, component, slug) {
+  const result = await graphql(generateQuery(slug))
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  const posts = result.data.allMdx.nodes
+
+  if (posts.length > 0) {
+    posts.forEach((post, index) => {
+      let previousPostId
+      let nextPostId
+
+      // don't include adjacent pages context for top level pages
+      if (slug) {
+        previousPostId = index === 0 ? null : posts[index - 1].id
+        nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      }
+
+      createPage({
+        path: post.fields.slug,
+        component,
+        context: {
+          id: post.id,
+          previousPostId,
+          nextPostId,
+        },
+      })
+    })
+  }
+}
+
+async function createPaginatedIndex(graphql, createPage, component, slug) {
+  const result = await graphql(generateQuery(slug))
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  const posts = result.data.allMdx.nodes
+
+  const postsPerPage = 5
+  const numPages = Math.ceil(posts.length / postsPerPage)
+
+  createPage({
+    path: `/${slug}`,
+    component,
+    context: {
+      limit: postsPerPage,
+      skip: 0,
+      numPages,
+      currentPage: 1,
+      glob: `/${slug}/*/`,
+    },
+  })
+
+  for (let i = 0; i < numPages; i++) {
+    createPage({
+      path: `/${slug}/${i + 1}`,
+      component,
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+        glob: `/${slug}/*/`,
+      },
+    })
+  }
+}
+
+function generateQuery(slug) {
+  const glob = slug ? `/${slug}/*/` : `/*/`
+  return `
+  query {
+    allMdx(
+      filter: {fields: {slug: {glob: "${glob}"}}}
+      sort: {fields: [frontmatter___date], order: ASC}
+      limit: 1000
+    ) {
+      nodes {
+        id
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+        }
+      }
+    }
+  }`
 }

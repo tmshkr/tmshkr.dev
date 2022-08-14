@@ -4,18 +4,15 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Layout from "components/SiteLayout"
 import Seo from "components/seo"
-import "./BlogPost.scss"
+import "./Post.scss"
 
-const BlogPostTemplate = ({
-  data: { previous, next, site, mdx: post },
-  location,
-}) => {
+const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
     <Layout location={location} title={siteTitle}>
       <article
-        className="BlogPost font-serif"
+        className="Post font-serif"
         itemScope
         itemType="http://schema.org/Article"
       >
@@ -23,11 +20,11 @@ const BlogPostTemplate = ({
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p className="font-sans">{post.frontmatter.date}</p>
         </header>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
         <hr />
         <footer></footer>
       </article>
-      <nav className="blog-post-nav">
+      <nav>
         <ul
           style={{
             display: `flex`,
@@ -66,14 +63,10 @@ export const Head = ({ data: { mdx: post } }) => {
   )
 }
 
-export default BlogPostTemplate
+export default Post
 
 export const pageQuery = graphql`
-  query BlogPostById(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
+  query PostById($id: String!, $previousPostId: String, $nextPostId: String) {
     site {
       siteMetadata {
         title
@@ -86,6 +79,11 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        url
+        github_repo
+        attachments {
+          publicURL
+        }
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {

@@ -1,0 +1,41 @@
+#video-player {
+  @media screen and (max-width: 42rem) {
+    width: 100vw;
+    margin: auto;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .player-wrapper {
+    cursor: pointer;
+    position: relative;
+    .svg-wrapper {
+      transition: all 0.25s;
+      background: rgba(42, 42, 42, 0.5);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      svg {
+        fill: #fff;
+        width: 42px;
+      }
+    }
+  }
+
+  &.playing {
+    .svg-wrapper {
+      background: rgba(42, 42, 42, 0);
+      svg {
+        display: none;
+      }
+    }
+  }
+}
