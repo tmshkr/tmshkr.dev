@@ -5,7 +5,7 @@ const blogPostsQuery = `
 query BlogPosts {
   allMdx(
     filter: {fields: {slug: {glob: "/blog/*/"}}}
-    sort: {fields: [frontmatter___date], order: DESC}
+    sort: {fields: [frontmatter___date], order: ASC}
     limit: 1000
   ) {
     nodes {
@@ -24,7 +24,7 @@ const projectQuery = `
 query Projects {
   allMdx(
     filter: {fields: {slug: {glob: "/projects/*/"}}}
-    sort: {fields: [frontmatter___date], order: DESC}
+    sort: {fields: [frontmatter___date], order: ASC}
   ) {
     nodes {
       id
@@ -59,6 +59,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const Post = path.resolve(`./src/templates/Post.tsx`)
 
   await createCollection(graphql, createPage, Post, blogPostsQuery)
+  await createCollection(graphql, createPage, Post, projectQuery)
+  await createCollection(graphql, createPage, Post, topLevelQuery)
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
