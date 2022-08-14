@@ -8,7 +8,6 @@ import "./Post.scss"
 
 const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-  const { attachments, url, title, github_repo } = post.frontmatter
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -21,9 +20,7 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p className="font-sans">{post.frontmatter.date}</p>
         </header>
-        <MDXRenderer {...{ attachments, url, title, github_repo }}>
-          {post.body}
-        </MDXRenderer>
+        <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
         <hr />
         <footer></footer>
       </article>
