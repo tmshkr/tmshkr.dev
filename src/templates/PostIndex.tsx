@@ -5,10 +5,11 @@ import Layout from "components/SiteLayout"
 import Seo from "components/seo"
 
 const PostIndex = ({ data, location, pageContext }) => {
-  const { currentPage, numPages, glob } = pageContext
+  const { currentPage, numPages } = pageContext
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMdx.nodes
-  const pathRoot = glob.match(/\/([^\/]*)/)[1]
+  // matches first path segment, e.g. blog from /blog/2
+  const pathRoot = location.pathname.match(/\/([^\/]*)/)[1]
 
   return (
     <Layout location={location} title={siteTitle}>
