@@ -4,9 +4,11 @@ import { Link, graphql } from "gatsby"
 import Layout from "components/SiteLayout"
 import Seo from "components/seo"
 
-const PostIndex = ({ data, location }) => {
+const PostIndex = ({ data, location, pageContext }) => {
+  const { currentPage, numPages, glob } = pageContext
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMdx.nodes
+  const pathRoot = glob.match(/\/([^\/]*)/)[1]
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -42,6 +44,32 @@ const PostIndex = ({ data, location }) => {
           )
         })}
       </ol>
+      <nav>
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+          }}
+        >
+          <li>
+            {currentPage < numPages && (
+              <Link to={`/${pathRoot}/${currentPage + 1}`} rel="prev">
+                ←
+              </Link>
+            )}
+          </li>
+          <li>
+            {currentPage > 1 && (
+              <Link to={`/${pathRoot}/${currentPage - 1}`} rel="next">
+                →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </nav>
     </Layout>
   )
 }
