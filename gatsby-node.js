@@ -39,14 +39,8 @@ async function createCollection(graphql, createPage, component, slug) {
 
   if (posts.length > 0) {
     posts.forEach((post, index) => {
-      let previousPostId
-      let nextPostId
-
-      // don't include adjacent pages context for top level pages
-      if (slug) {
-        previousPostId = index === 0 ? null : posts[index - 1].id
-        nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-      }
+      const previousPostId = index === 0 ? null : posts[index - 1].id
+      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
 
       createPage({
         path: post.fields.slug,
