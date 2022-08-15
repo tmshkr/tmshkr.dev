@@ -43,13 +43,13 @@ export default function Navbar() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 
                   <Link to="/about" className={activeItemClasses}>
-                    About
+                    about
                   </Link>
                   <Link to="/blog" className={inactiveItemClasses}>
-                    Blog
+                    blog
                   </Link>
                   <Link to="/projects" className={inactiveItemClasses}>
-                    Projects
+                    projects
                   </Link>
                 </div>
               </div>
@@ -95,21 +95,21 @@ export default function Navbar() {
                   onClick={() => navigate("/about")}
                   className="bg-indigo-50 dark:bg-slate-500 border-indigo-500 text-indigo-700 dark:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
-                  About
+                  about
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   onClick={() => navigate("/blog")}
                   className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
-                  Blog
+                  blog
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   onClick={() => navigate("/projects")}
                   className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                 >
-                  Projects
+                  projects
                 </Disclosure.Button>
               </div>
             </Disclosure.Panel>
