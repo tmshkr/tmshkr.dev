@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
       <Navbar />
       <div className="max-w-2xl m-auto p-4 md:p-0">
         <main className="mt-4">{children}</main>
-        <footer className="text-center mx-auto child:p-1 child:fill-stone-400 child-hover:fill-stone-500 dark:child:fill-slate-400 dark:child-hover:fill-slate-300">
+        <footer className="clear-both text-center mx-auto mt-4 mb-12 child:p-1 child:fill-stone-400 child-hover:fill-stone-500 dark:child:fill-slate-400 dark:child-hover:fill-slate-300">
           <a
             href="https://www.linkedin.com/in/tmshkr/"
             title="LinkedIn"

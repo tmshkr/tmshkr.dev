@@ -80,7 +80,15 @@ const config = {
         },
       },
     },
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        sassOptions: {
+          includePaths: ["node_modules"],
+        },
+      },
+    },
+    `gatsby-plugin-minify`,
     `gatsby-plugin-emotion`,
 
     {

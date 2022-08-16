@@ -16,32 +16,26 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p className="font-sans">{post.frontmatter.date}</p>
+        <header className="my-4">
+          <h1 itemProp="headline" className="mb-0">
+            {post.frontmatter.title}
+          </h1>
+          <p className="font-sans m-0">{post.frontmatter.date}</p>
         </header>
         <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
         <hr />
         <footer></footer>
       </article>
       <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
+        <ul className="list-none p-0 m-0 mt-4 child:inline-block">
+          <li className="mr-4">
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
           </li>
-          <li>
+          <li className="float-right">
             {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
