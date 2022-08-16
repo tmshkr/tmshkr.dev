@@ -88,7 +88,6 @@ const config = {
         },
       },
     },
-    `gatsby-plugin-minify`,
     `gatsby-plugin-emotion`,
 
     {
