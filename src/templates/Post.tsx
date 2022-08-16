@@ -16,7 +16,7 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
+        <header className="my-4">
           <h1 itemProp="headline" className="mb-0">
             {post.frontmatter.title}
           </h1>
@@ -27,7 +27,7 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
         <footer></footer>
       </article>
       <nav>
-        <ul className="list-none p-0 m-0 mt-2 child:inline-block">
+        <ul className="list-none p-0 m-0 mt-4 child:inline-block">
           <li className="mr-4">
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
