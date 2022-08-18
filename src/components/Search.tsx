@@ -9,6 +9,7 @@ import React, {
 import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-hooks-web"
+import "./Search.scss"
 
 const searchClient = algoliasearch(
   "QOE9A9XPBA",
@@ -36,7 +37,7 @@ export function Search() {
           >
             <div
               onClick={e => e.stopPropagation()}
-              className="bg-white dark:bg-slate-800 max-w-2xl mt-24 mx-auto p-4 md:p-0"
+              className="bg-white dark:bg-slate-800 max-w-lg mt-24 mx-auto p-4 rounded-lg shadow-lg"
             >
               <SearchBox />
               <Hits hitComponent={Hit} />

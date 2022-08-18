@@ -1,0 +1,39 @@
+.ais-SearchBox {
+  .ais-SearchBox-form {
+    display: flex;
+    .ais-SearchBox-input {
+      border-radius: 3px;
+      padding: 5px;
+      width: 100%;
+    }
+    .ais-SearchBox-reset {
+      display: none;
+    }
+    .ais-SearchBox-submit {
+      border-radius: 3px;
+      padding: 0.5rem;
+    }
+  }
+}
+
+html.dark {
+  .ais-SearchBox {
+    .ais-SearchBox-form {
+      .ais-SearchBox-input {
+        border: 1px solid #ccc;
+        color: #333;
+      }
+    }
+  }
+}
+
+html.light {
+  .ais-SearchBox {
+    .ais-SearchBox-form {
+      .ais-SearchBox-input {
+        border: 1px solid #ccc;
+        color: #333;
+      }
+    }
+  }
+}
