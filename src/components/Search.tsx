@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
-import { InstantSearch, SearchBox, Hits } from "react-instantsearch-hooks-web"
+import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
 
 const { disableBodyScroll, enableBodyScroll } = require("body-scroll-lock")
@@ -75,7 +75,13 @@ class SearchModal extends React.PureComponent<any, any> {
             >
               esc
             </button>
-            <SearchBox className="w-full" />
+            <SearchBox
+              autoFocus
+              className="w-full"
+              onKeyDown={e => {
+                if (e.key === "Escape") this.props.closeModal()
+              }}
+            />
           </div>
           <Hits hitComponent={Hit} className="overflow-scroll px-4" />
         </div>
