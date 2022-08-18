@@ -9,6 +9,8 @@ import React, {
 import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-hooks-web"
+import { SearchIcon } from "@heroicons/react/outline"
+
 import "./Search.scss"
 
 const searchClient = algoliasearch(
@@ -29,7 +31,16 @@ export function Search() {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <InstantSearch searchClient={searchClient} indexName="pages">
-      {isOpen ? (
+      <div className="flex items-center ml-auto">
+        <button
+          className="dark:bg-slate-600 py-2 px-4 rounded-md"
+          onFocus={() => setIsOpen(true)}
+        >
+          <SearchIcon className="w-5 inline mr-2 -mt-1" />
+          Search
+        </button>
+      </div>
+      {isOpen &&
         createPortal(
           <div
             onClick={() => setIsOpen(false)}
@@ -44,10 +55,7 @@ export function Search() {
             </div>
           </div>,
           document.body
-        )
-      ) : (
-        <input onFocus={() => setIsOpen(true)} />
-      )}
+        )}
     </InstantSearch>
   )
 }
