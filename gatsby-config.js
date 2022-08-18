@@ -1,6 +1,31 @@
-if (process.env.NODE_ENV === "development") {
-  require("dotenv").config()
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const myQuery = `{
+  allMdx(sort: {fields: [frontmatter___date], order: DESC}) {
+    nodes {
+      id
+      excerpt
+      fields {
+        slug
+      }
+      frontmatter {
+        date(formatString: "MMMM DD, YYYY")
+        title
+      }
+    }
+  }
 }
+`
+
+const queries = [
+  {
+    query: myQuery,
+    transformer: ({ data }) => data.allMdx.nodes, // optional
+    indexName: process.env.ALGOLIA_INDEX_NAME, // overrides main index name, optional
+  },
+]
 
 const config = {
   siteMetadata: {
@@ -94,6 +119,16 @@ const config = {
       resolve: "gatsby-redirect-from",
       options: {
         query: "allMdx",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
+        queries,
+        chunkSize: 10000, // default: 1000
       },
     },
     `gatsby-plugin-netlify`,

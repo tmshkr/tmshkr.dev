@@ -1,7 +1,8 @@
-import * as React from "react"
+import React, { useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
-import { Link, navigate } from "gatsby"
+import { MoonIcon, MenuIcon } from "@heroicons/react/outline"
+import { Link, navigate, useStaticQuery, graphql } from "gatsby"
+import { Search } from "./Search"
 
 declare var window: any
 declare var document: any
@@ -53,6 +54,7 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
+              <Search />
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <button
                   type="button"
