@@ -52,7 +52,7 @@ export function Search() {
       <div className="flex items-center ml-auto">
         <button
           className="dark:bg-slate-600 py-2 px-4 rounded-md"
-          onFocus={openModal}
+          onClick={openModal}
         >
           <SearchIcon className="w-5 inline mr-2 -mt-1" />
           Search
@@ -62,14 +62,22 @@ export function Search() {
         createPortal(
           <div
             onClick={closeModal}
-            className="bg-white/60 dark:bg-slate-500/60 backdrop-blur-sm dark:text-white absolute top-0 right-0 left-0 bottom-0"
+            className="bg-white/60 dark:bg-slate-500/60 backdrop-blur-sm dark:text-white fixed top-0 right-0 left-0 bottom-0"
           >
             <div
               ref={scrollDiv}
               onClick={e => e.stopPropagation()}
-              className="bg-white dark:bg-slate-800 max-w-lg max-h-[100%] sm:max-h-[80%] min-h-[33%] overflow-scroll bg-scroll mt-0 sm:mt-24 mx-auto p-4 rounded-lg shadow-lg"
+              className="bg-white dark:bg-slate-800 w-full sm:max-w-lg max-h-[100%] sm:max-h-[80%] min-h-[33%] overflow-scroll mt-0 sm:mt-24 mx-auto p-4 rounded-b-lg sm:rounded-lg shadow-lg"
             >
-              <SearchBox />
+              <div className="flex">
+                <button
+                  onClick={closeModal}
+                  className="py-1 px-2 mr-2 bg-slate-500 rounded-[3px]"
+                >
+                  esc
+                </button>
+                <SearchBox className="w-full" />
+              </div>
               <Hits hitComponent={Hit} />
             </div>
           </div>,
