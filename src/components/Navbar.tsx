@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { MoonIcon, MenuIcon } from "@heroicons/react/outline"
 import { Link, navigate, useStaticQuery, graphql } from "gatsby"
 import { Search } from "./Search"
+import { getPathRoot } from "utils/path"
 
 declare var window: any
 declare var document: any
@@ -15,8 +16,15 @@ const activeItemClasses =
   "border-indigo-200 text-gray-900 dark:text-gray-300 border-b-2 font-medium no-underline"
 const inactiveItemClasses =
   "border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 hover:text-gray-700 border-b-2 font-medium no-underline"
+const activePathClassesMobile =
+  "bg-indigo-50 dark:bg-slate-500 border-indigo-500 text-indigo-700 dark:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+const inactivePathClassesMobile =
+  "border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
 
-export default function Navbar() {
+export default function Navbar({ location }) {
+  const pathRoot = getPathRoot(location.pathname)
+  const navPaths = ["about", "blog", "projects"]
+
   return (
     <Disclosure as="nav">
       {({ open, close }) => {
@@ -41,17 +49,19 @@ export default function Navbar() {
                   tmshkr
                 </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-
-                  <Link to="/about" className={activeItemClasses}>
-                    about
-                  </Link>
-                  <Link to="/blog" className={inactiveItemClasses}>
-                    blog
-                  </Link>
-                  <Link to="/projects" className={inactiveItemClasses}>
-                    projects
-                  </Link>
+                  {navPaths.map(path => (
+                    <Link
+                      to={`/${path}/`}
+                      key={path}
+                      className={
+                        path === pathRoot
+                          ? activeItemClasses
+                          : inactiveItemClasses
+                      }
+                    >
+                      {path}
+                    </Link>
+                  ))}
                 </div>
               </div>
               <Search />
@@ -91,28 +101,19 @@ export default function Navbar() {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="pt-2 pb-3 space-y-1">
-                {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-                <Disclosure.Button
-                  as="a"
-                  onClick={() => navigate("/about")}
-                  className="bg-indigo-50 dark:bg-slate-500 border-indigo-500 text-indigo-700 dark:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                >
-                  about
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  onClick={() => navigate("/blog")}
-                  className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                >
-                  blog
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  onClick={() => navigate("/projects")}
-                  className="border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                >
-                  projects
-                </Disclosure.Button>
+                {navPaths.map(path => (
+                  <Disclosure.Button
+                    as="a"
+                    onClick={() => navigate(`/${path}/`)}
+                    className={
+                      path === pathRoot
+                        ? activePathClassesMobile
+                        : inactivePathClassesMobile
+                    }
+                  >
+                    {path}
+                  </Disclosure.Button>
+                ))}
               </div>
             </Disclosure.Panel>
           </>

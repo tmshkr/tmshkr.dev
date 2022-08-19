@@ -5,10 +5,10 @@ import GitHub from "@fortawesome/fontawesome-free/svgs/brands/github.svg"
 import At from "@fortawesome/fontawesome-free/svgs/solid/at.svg"
 import "./SiteLayout.scss"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   return (
     <>
-      <Navbar />
+      <Navbar {...{ location }} />
       <div className="max-w-2xl m-auto p-4 md:p-0">
         <main className="mt-4">{children}</main>
         <footer className="clear-both text-center mx-auto mt-4 mb-12 child:p-1 child:fill-stone-400 child-hover:fill-stone-500 dark:child:fill-slate-400 dark:child-hover:fill-slate-300">

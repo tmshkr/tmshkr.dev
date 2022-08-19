@@ -3,13 +3,14 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "components/SiteLayout"
 import Seo from "components/seo"
+import { getPathRoot } from "utils/path"
 
 const PostIndex = ({ data, location, pageContext }) => {
   const { currentPage, numPages } = pageContext
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMdx.nodes
-  // matches first path segment, e.g. blog from /blog/2
-  const pathRoot = location.pathname.match(/\/([^\/]*)/)[1]
+
+  const pathRoot = getPathRoot(location.pathname)
 
   return (
     <Layout location={location} title={siteTitle}>
