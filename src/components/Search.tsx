@@ -76,12 +76,6 @@ class SearchModal extends React.PureComponent<any, any> {
         >
           <InstantSearch searchClient={searchClient} indexName="pages">
             <div className="flex p-4">
-              <button
-                onClick={this.props.closeModal}
-                className="py-1 px-2 mr-2 bg-slate-500 rounded-[3px]"
-              >
-                esc
-              </button>
               <SearchBox
                 autoFocus
                 className="w-full"
@@ -89,6 +83,11 @@ class SearchModal extends React.PureComponent<any, any> {
                   if (e.key === "Escape") this.props.closeModal()
                 }}
               />
+              <button onClick={this.props.closeModal}>
+                <span className=" bg-slate-500 ml-2 p-2 rounded-[3px]">
+                  esc
+                </span>
+              </button>
             </div>
             <Hits hitComponent={Hit} className="overflow-scroll px-4" />
           </InstantSearch>
