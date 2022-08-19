@@ -27,7 +27,10 @@ export function Search() {
 
   useEffect(() => {
     if (!isMobileOrTablet) {
-      Mousetrap.bind(isMac ? "command+k" : "ctrl+k", openModal)
+      Mousetrap.bind(isMac ? "command+k" : "ctrl+k", () => {
+        openModal()
+        return false
+      })
       setShortcut(isMac ? "⌘K" : "^K")
     }
   }, [])
@@ -58,7 +61,10 @@ class SearchModal extends React.PureComponent<any, any> {
   private hitsRef = React.createRef<HTMLDivElement>()
 
   componentDidMount() {
-    Mousetrap.bind("esc", this.props.closeModal)
+    Mousetrap.bind("esc", () => {
+      this.props.closeModal()
+      return false
+    })
     disableBodyScroll(this.hitsRef.current)
   }
   componentWillUnmount() {
@@ -82,7 +88,10 @@ class SearchModal extends React.PureComponent<any, any> {
                 autoFocus
                 className="w-full"
                 onKeyDown={e => {
-                  if (e.key === "Escape") this.props.closeModal()
+                  if (e.key === "Escape") {
+                    e.preventDefault()
+                    this.props.closeModal()
+                  }
                 }}
               />
               <button onClick={this.props.closeModal}>
