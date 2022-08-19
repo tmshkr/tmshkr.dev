@@ -3,14 +3,11 @@ import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
-import { isMobileOrTablet } from "utils"
+import { isMobileOrTablet, isMac } from "utils/browser"
 import "./Search.scss"
 
 const { disableBodyScroll, enableBodyScroll } = require("body-scroll-lock")
 const Mousetrap = require("mousetrap")
-const { detect } = require("detect-browser")
-const browser = detect()
-const isMac = browser.os === "Mac OS"
 
 const searchClient = algoliasearch(
   "QOE9A9XPBA",

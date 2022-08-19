@@ -1,4 +1,7 @@
 /* eslint-disable no-useless-escape */
+const { detect } = require("detect-browser")
+const browser = detect()
+export const isMac = browser.os === "Mac OS"
 
 const mobileAndTabletCheck = function () {
   let check = false
