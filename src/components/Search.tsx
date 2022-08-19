@@ -73,7 +73,7 @@ class SearchModal extends React.PureComponent<any, any> {
       >
         <div
           onClick={e => e.stopPropagation()}
-          className="flex flex-col bg-white dark:bg-slate-800 w-full sm:max-w-lg max-h-full sm:max-h-[80%] mt-0 sm:mt-24 mx-auto sm:rounded-lg shadow-lg"
+          className="flex flex-col bg-white dark:bg-slate-800 w-full sm:max-w-lg max-h-full sm:max-h-[90%] mt-0 sm:mt-[5%] mx-auto sm:rounded-lg shadow-lg"
         >
           <InstantSearch searchClient={searchClient} indexName="pages">
             <div className="flex p-4">
