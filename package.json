@@ -1,12 +1,8 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "tmshkr.dev",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  },
+  "version": "0.4.2",
+  "author": "Tim Shaker <tim@tmshkr.com>",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -62,15 +58,6 @@
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.7.4"
-  },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "0BSD",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
     "build": "gatsby build",
