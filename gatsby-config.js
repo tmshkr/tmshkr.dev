@@ -62,6 +62,13 @@ const config = {
         extensions: [`.md`, `.mdx`],
         gatsbyRemarkPlugins: [
           {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "noopener noreferrer",
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
@@ -132,6 +139,7 @@ const config = {
       },
     },
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-catch-links`,
     "gatsby-plugin-meta-redirect", // make sure this is always the last one
   ],
 }

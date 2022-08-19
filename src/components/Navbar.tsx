@@ -51,7 +51,7 @@ export default function Navbar({ location }) {
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {navPaths.map(path => (
                     <Link
-                      to={`/${path}/`}
+                      to={`/${path}`}
                       key={path}
                       className={
                         path === pathRoot
@@ -104,7 +104,8 @@ export default function Navbar({ location }) {
                 {navPaths.map(path => (
                   <Disclosure.Button
                     as="a"
-                    onClick={() => navigate(`/${path}/`)}
+                    key={`${path}#mobile`}
+                    onClick={() => navigate(`/${path}`)}
                     className={
                       path === pathRoot
                         ? activePathClassesMobile
