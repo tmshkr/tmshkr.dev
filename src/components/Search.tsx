@@ -16,6 +16,7 @@ const searchClient = algoliasearch(
 
 export function Search() {
   const [isOpen, setIsOpen] = useState(false)
+  const [shortcut, setShortcut] = useState("")
 
   const closeModal = () => {
     setIsOpen(false)
@@ -25,7 +26,10 @@ export function Search() {
   }
 
   useEffect(() => {
-    Mousetrap.bind(isMac ? "command+k" : "ctrl+k", openModal)
+    if (!isMobileOrTablet) {
+      Mousetrap.bind(isMac ? "command+k" : "ctrl+k", openModal)
+      setShortcut(isMac ? "⌘K" : "^K")
+    }
   }, [])
 
   return (
@@ -37,9 +41,9 @@ export function Search() {
         >
           <SearchIcon className="w-5 inline mr-2 -mt-1" />
           Search{" "}
-          {!isMobileOrTablet && (
+          {shortcut && (
             <span className="hidden sm:inline bg-slate-500 rounded-md ml-2 p-1">
-              {isMac ? "⌘K" : "^K"}
+              {shortcut}
             </span>
           )}
         </button>

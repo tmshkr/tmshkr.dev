@@ -152,6 +152,9 @@ if (process.env.NODE_ENV === "development") {
       name: `drafts`,
     },
   })
+  config.flags = {
+    DEV_SSR: true,
+  }
 }
 
 module.exports = config

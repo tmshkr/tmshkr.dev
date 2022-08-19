@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "components/SiteLayout"
 import Seo from "components/seo"
 import { getPathRoot } from "utils/path"
 
@@ -13,7 +12,7 @@ const PostIndex = ({ data, location, pageContext }) => {
   const pathRoot = getPathRoot(location.pathname)
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <>
       <ol className="list-none p-0">
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -72,7 +71,7 @@ const PostIndex = ({ data, location, pageContext }) => {
           </li>
         </ul>
       </nav>
-    </Layout>
+    </>
   )
 }
 

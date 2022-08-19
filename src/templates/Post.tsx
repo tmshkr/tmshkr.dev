@@ -2,7 +2,6 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import Layout from "components/SiteLayout"
 import Seo from "components/seo"
 import "./Post.scss"
 
@@ -10,7 +9,7 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <>
       <article
         className="Post font-serif"
         itemScope
@@ -44,7 +43,7 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
           </li>
         </ul>
       </nav>
-    </Layout>
+    </>
   )
 }
 
