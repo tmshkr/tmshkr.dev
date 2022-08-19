@@ -52,15 +52,15 @@ export function Search() {
 }
 
 class SearchModal extends React.PureComponent<any, any> {
-  private modal = React.createRef<HTMLDivElement>()
+  private hitsRef = React.createRef<HTMLDivElement>()
 
   componentDidMount() {
     Mousetrap.bind("esc", this.props.closeModal)
-    disableBodyScroll(this.modal.current)
+    disableBodyScroll(this.hitsRef.current)
   }
   componentWillUnmount() {
     Mousetrap.unbind("esc")
-    enableBodyScroll(this.modal.current)
+    enableBodyScroll(this.hitsRef.current)
   }
 
   render() {
@@ -70,7 +70,6 @@ class SearchModal extends React.PureComponent<any, any> {
         className="bg-white/60 dark:bg-slate-500/60 dark:text-white fixed top-0 right-0 left-0 bottom-0"
       >
         <div
-          ref={this.modal}
           onClick={e => e.stopPropagation()}
           className="flex flex-col bg-white dark:bg-slate-800 w-full sm:max-w-lg max-h-full sm:max-h-[80%] mt-0 sm:mt-24 mx-auto sm:rounded-lg shadow-lg"
         >
@@ -89,7 +88,9 @@ class SearchModal extends React.PureComponent<any, any> {
                 </span>
               </button>
             </div>
-            <Hits hitComponent={Hit} className="overflow-scroll px-4" />
+            <div ref={this.hitsRef} className="overflow-scroll px-4">
+              <Hits hitComponent={Hit} />
+            </div>
           </InstantSearch>
         </div>
       </div>
