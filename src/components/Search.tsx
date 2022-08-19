@@ -3,14 +3,14 @@ import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
+import { isMobileOrTablet } from "utils"
+import "./Search.scss"
 
 const { disableBodyScroll, enableBodyScroll } = require("body-scroll-lock")
 const Mousetrap = require("mousetrap")
 const { detect } = require("detect-browser")
 const browser = detect()
 const isMac = browser.os === "Mac OS"
-
-import "./Search.scss"
 
 const searchClient = algoliasearch(
   "QOE9A9XPBA",
@@ -40,9 +40,11 @@ export function Search() {
         >
           <SearchIcon className="w-5 inline mr-2 -mt-1" />
           Search{" "}
-          <span className="hidden sm:inline bg-slate-500 rounded-md ml-2 p-1">
-            {isMac ? "⌘K" : "^K"}
-          </span>
+          {!isMobileOrTablet && (
+            <span className="hidden sm:inline bg-slate-500 rounded-md ml-2 p-1">
+              {isMac ? "⌘K" : "^K"}
+            </span>
+          )}
         </button>
       </div>
       {isOpen &&
