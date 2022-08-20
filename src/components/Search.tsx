@@ -9,15 +9,38 @@ import {
 } from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
 import { isMobileOrTablet, isMac } from "utils/browser"
+import { debouncePromise } from "utils/promise"
 import "./Search.scss"
 
 const { disableBodyScroll, enableBodyScroll } = require("body-scroll-lock")
 const Mousetrap = require("mousetrap")
 
-const searchClient = algoliasearch(
+const algoliaClient = algoliasearch(
   "QOE9A9XPBA",
   "51ef76747e385c0819fc9a496322b785"
 )
+
+const debouncedSearch = debouncePromise(algoliaClient.search, 300)
+
+const searchClient = {
+  ...algoliaClient,
+  search(requests) {
+    console.log(requests)
+    if (requests.every(({ params }) => !params.query)) {
+      return Promise.resolve({
+        results: requests.map(() => ({
+          hits: [],
+          nbHits: 0,
+          nbPages: 0,
+          page: 0,
+          processingTimeMS: 0,
+        })),
+      })
+    }
+
+    return debouncedSearch(requests)
+  },
+}
 
 export function Search() {
   const [isOpen, setIsOpen] = useState(false)
