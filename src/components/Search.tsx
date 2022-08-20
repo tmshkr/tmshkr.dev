@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
-import { InstantSearch, SearchBox, Hits } from "react-instantsearch-dom"
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  Highlight,
+} from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
 import { isMobileOrTablet, isMac } from "utils/browser"
 import "./Search.scss"
@@ -111,11 +116,16 @@ class SearchModal extends React.PureComponent<any, any> {
 }
 
 function Hit({ hit }) {
+  console.log(hit)
   return (
     <article>
-      <h1>{hit.frontmatter.title}</h1>
-      <p>{hit.frontmatter.date}</p>
-      <p>{hit.excerpt}</p>
+      <h1 className="m-0">
+        <Highlight attribute="frontmatter.title" hit={hit} />
+      </h1>
+      <p className="m-0">{hit.frontmatter.date}</p>
+      <p>
+        <Highlight attribute="content" hit={hit} />
+      </p>
     </article>
   )
 }

@@ -18,6 +18,11 @@
   display: none;
 }
 
+.ais-Highlight-highlighted {
+  color: black;
+  background-color: yellow;
+}
+
 html.dark {
   .ais-SearchBox-input {
     border: 1px solid #ccc;
