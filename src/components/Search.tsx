@@ -6,6 +6,7 @@ import {
   SearchBox,
   Hits,
   Highlight,
+  connectStateResults,
 } from "react-instantsearch-dom"
 import { SearchIcon } from "@heroicons/react/outline"
 import { isMobileOrTablet, isMac } from "utils/browser"
@@ -129,6 +130,7 @@ class SearchModal extends React.PureComponent<any, any> {
               </button>
             </div>
             <div ref={this.hitsRef} className="overflow-scroll px-4">
+              <StateResults />
               <Hits hitComponent={Hit} />
             </div>
           </InstantSearch>
@@ -152,3 +154,8 @@ function Hit({ hit }) {
     </article>
   )
 }
+const StateResults = connectStateResults(({ searchResults }) => {
+  if (!searchResults) return null
+  const { nbHits, query } = searchResults
+  return <div>{query && `${nbHits} result${nbHits === 1 ? "" : "s"}`}</div>
+})
