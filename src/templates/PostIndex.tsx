@@ -6,7 +6,6 @@ import { getPathRoot } from "utils/path"
 
 const PostIndex = ({ data, location, pageContext }) => {
   const { currentPage, numPages } = pageContext
-  const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMdx.nodes
 
   const pathRoot = getPathRoot(location.pathname)
