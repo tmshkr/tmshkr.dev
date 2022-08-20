@@ -121,13 +121,6 @@ const config = {
       },
     },
     `gatsby-plugin-emotion`,
-
-    {
-      resolve: "gatsby-redirect-from",
-      options: {
-        query: "allMdx",
-      },
-    },
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
@@ -140,7 +133,6 @@ const config = {
     },
     `gatsby-plugin-netlify`,
     `gatsby-plugin-catch-links`,
-    "gatsby-plugin-meta-redirect", // make sure this is always the last one
   ],
 }
 
