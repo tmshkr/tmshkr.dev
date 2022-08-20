@@ -43,7 +43,7 @@ export default function Navbar({ location }) {
             <div className="max-w-2xl mx-auto px-4 md:px-0 flex justify-between h-16">
               <div className="flex items-center">
                 <Link
-                  to="/"
+                  to="/about"
                   className="text-gray-500 dark:text-gray-400 no-underline"
                 >
                   tmshkr
