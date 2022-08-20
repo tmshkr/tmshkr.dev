@@ -44,6 +44,17 @@ const config = {
             },
           },
           {
+            resolve: "gatsby-remark-mermaid",
+            options: {
+              theme: "forest",
+              mermaidOptions: {
+                sequence: {
+                  useMaxWidth: true,
+                },
+              },
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
