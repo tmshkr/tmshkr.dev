@@ -6,8 +6,6 @@ import Seo from "components/seo"
 import "./Post.scss"
 
 const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
-  const siteTitle = site.siteMetadata?.title || `Title`
-
   return (
     <>
       <article
@@ -16,14 +14,17 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
         itemType="http://schema.org/Article"
       >
         <header className="my-4">
-          <h1 itemProp="headline" className="mb-0">
-            {post.frontmatter.title}
-          </h1>
-          <p className="font-sans m-0">{post.frontmatter.date}</p>
+          {post.frontmatter.title !== "about" && (
+            <>
+              <h1 itemProp="headline" className="mb-0">
+                {post.frontmatter.title}
+              </h1>
+              <p className="font-sans m-0">{post.frontmatter.date}</p>
+            </>
+          )}
         </header>
         <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
         <hr />
-        <footer></footer>
       </article>
       <nav>
         <ul className="list-none p-0 m-0 mt-4 child:inline-block">
