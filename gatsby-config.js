@@ -2,31 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const myQuery = `{
-  allMdx(sort: {fields: [frontmatter___date], order: DESC}) {
-    nodes {
-      id
-      excerpt
-      fields {
-        slug
-      }
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        title
-      }
-    }
-  }
-}
-`
-
-const queries = [
-  {
-    query: myQuery,
-    transformer: ({ data }) => data.allMdx.nodes, // optional
-    indexName: process.env.ALGOLIA_INDEX_NAME, // overrides main index name, optional
-  },
-]
-
 const config = {
   siteMetadata: {
     title: `tmshkr | Tim Shaker`,
@@ -127,7 +102,27 @@ const config = {
         appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
-        queries,
+        queries: [
+          {
+            query: `{
+              allMdx(sort: {fields: [frontmatter___date], order: DESC}) {
+                nodes {
+                  id
+                  content: excerpt(pruneLength: 999999999)
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    date(formatString: "MMMM DD, YYYY")
+                    title
+                  }
+                }
+              }
+            }`,
+            transformer: ({ data }) => data.allMdx.nodes,
+            indexName: process.env.ALGOLIA_INDEX_NAME,
+          },
+        ],
         chunkSize: 10000, // default: 1000
       },
     },
