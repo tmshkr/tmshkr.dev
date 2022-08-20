@@ -29,12 +29,12 @@ const queries = [
 
 const config = {
   siteMetadata: {
-    title: `tmshkr`,
+    title: `tmshkr | Tim Shaker`,
     author: {
       name: `Tim Shaker`,
       summary: `Tim Shaker is a full-stack engineer in Southern California`,
     },
-    description: `My portfolio/blog`,
+    description: `Tim Shaker is a full-stack engineer in Southern California`,
     siteUrl: `https://tmshkr.dev/`,
     social: {
       twitter: `tmshkr`,
