@@ -108,7 +108,7 @@ const config = {
               allMdx(sort: {fields: [frontmatter___date], order: DESC}) {
                 nodes {
                   id
-                  content: excerpt(pruneLength: 999999999)
+                  content: excerpt(pruneLength: 2147483647)
                   fields {
                     slug
                   }
