@@ -8,6 +8,7 @@ import {
   Highlight,
   connectStateResults,
 } from "react-instantsearch-dom"
+import { Link } from "gatsby"
 import { SearchIcon } from "@heroicons/react/outline"
 import { isMobileOrTablet, isMac } from "utils/browser"
 import { debouncePromise } from "utils/promise"
@@ -43,7 +44,7 @@ const searchClient = {
   },
 }
 
-export function Search() {
+export function Search({ location }) {
   const [isOpen, setIsOpen] = useState(false)
   const [shortcut, setShortcut] = useState("")
 
@@ -63,6 +64,10 @@ export function Search() {
       setShortcut(isMac ? "⌘K" : "^K")
     }
   }, [])
+
+  useEffect(() => {
+    closeModal()
+  }, [location.key])
 
   return (
     <>
@@ -131,7 +136,7 @@ class SearchModal extends React.PureComponent<any, any> {
             </div>
             <div ref={this.hitsRef} className="overflow-scroll px-4">
               <StateResults />
-              <Hits hitComponent={Hit} />
+              <Hits hitComponent={Hit} closeModal={this.props.closeModal} />
             </div>
           </InstantSearch>
         </div>
@@ -143,7 +148,7 @@ class SearchModal extends React.PureComponent<any, any> {
 function Hit({ hit }) {
   console.log(hit)
   return (
-    <article>
+    <Link to={hit.fields.slug}>
       <h1 className="m-0">
         <Highlight attribute="frontmatter.title" hit={hit} />
       </h1>
@@ -151,7 +156,7 @@ function Hit({ hit }) {
       <p>
         <Highlight attribute="content" hit={hit} />
       </p>
-    </article>
+    </Link>
   )
 }
 const StateResults = connectStateResults(({ searchResults }) => {

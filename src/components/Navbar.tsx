@@ -64,7 +64,7 @@ export default function Navbar({ location }) {
                   ))}
                 </div>
               </div>
-              <Search />
+              <Search {...{ location }} />
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
                 <button
                   type="button"
