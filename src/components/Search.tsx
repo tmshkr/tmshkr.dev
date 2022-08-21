@@ -27,7 +27,6 @@ const debouncedSearch = debouncePromise(algoliaClient.search, 300)
 const searchClient = {
   ...algoliaClient,
   search(requests) {
-    console.log(requests)
     if (requests.every(({ params }) => !params.query)) {
       return Promise.resolve({
         results: requests.map(() => ({
