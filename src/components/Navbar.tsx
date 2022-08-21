@@ -23,7 +23,11 @@ const inactivePathClassesMobile =
 
 export default function Navbar({ location }) {
   const pathRoot = getPathRoot(location.pathname)
-  const navPaths = ["about", "blog", "projects"]
+  const navPaths = [
+    { slug: "about", label: "📖 about" },
+    { slug: "blog", label: "📓 blog" },
+    { slug: "projects", label: "💻 projects" },
+  ]
 
   return (
     <Disclosure as="nav">
@@ -49,17 +53,17 @@ export default function Navbar({ location }) {
                   tmshkr
                 </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  {navPaths.map(path => (
+                  {navPaths.map(({ slug, label }) => (
                     <Link
-                      to={`/${path}`}
-                      key={path}
+                      to={`/${slug}`}
+                      key={slug}
                       className={
-                        path === pathRoot
+                        slug === pathRoot
                           ? activeItemClasses
                           : inactiveItemClasses
                       }
                     >
-                      {path}
+                      {label}
                     </Link>
                   ))}
                 </div>
@@ -101,18 +105,18 @@ export default function Navbar({ location }) {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="pt-2 pb-3 space-y-1">
-                {navPaths.map(path => (
+                {navPaths.map(({ slug, label }) => (
                   <Disclosure.Button
                     as="a"
-                    key={`${path}#mobile`}
-                    onClick={() => navigate(`/${path}`)}
+                    key={`${slug}#mobile`}
+                    onClick={() => navigate(`/${slug}`)}
                     className={
-                      path === pathRoot
+                      slug === pathRoot
                         ? activePathClassesMobile
                         : inactivePathClassesMobile
                     }
                   >
-                    {path}
+                    {label}
                   </Disclosure.Button>
                 ))}
               </div>
