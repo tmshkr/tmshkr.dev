@@ -62,6 +62,7 @@ const PostIndex = ({ data, location, pageContext }) => {
           )
         })}
       </ol>
+      <hr />
       <nav>
         <ul
           style={{
