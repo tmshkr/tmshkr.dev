@@ -1,14 +1,32 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import React, { useEffect } from "react"
+import { Link, graphql, navigate } from "gatsby"
 
 import Seo from "components/seo"
 import { getPathRoot } from "utils/path"
+
+const Mousetrap = require("mousetrap")
 
 const PostIndex = ({ data, location, pageContext }) => {
   const { currentPage, numPages } = pageContext
   const posts = data.allMdx.nodes
 
   const pathRoot = getPathRoot(location.pathname)
+  const prevPage = currentPage > 1 ? `/${pathRoot}/${currentPage - 1}` : null
+  const nextPage =
+    currentPage < numPages ? `/${pathRoot}/${currentPage + 1}` : null
+
+  useEffect(() => {
+    Mousetrap.bind("left", () => {
+      if (nextPage) navigate(nextPage)
+    })
+    Mousetrap.bind("right", () => {
+      if (prevPage) navigate(prevPage)
+    })
+    return () => {
+      Mousetrap.unbind("left")
+      Mousetrap.unbind("right")
+    }
+  }, [location.key])
 
   return (
     <>
@@ -55,15 +73,15 @@ const PostIndex = ({ data, location, pageContext }) => {
           }}
         >
           <li>
-            {currentPage < numPages && (
-              <Link to={`/${pathRoot}/${currentPage + 1}`} rel="prev">
+            {nextPage && (
+              <Link to={nextPage} rel="next">
                 ←
               </Link>
             )}
           </li>
           <li>
-            {currentPage > 1 && (
-              <Link to={`/${pathRoot}/${currentPage - 1}`} rel="next">
+            {prevPage && (
+              <Link to={prevPage} rel="prev">
                 →
               </Link>
             )}

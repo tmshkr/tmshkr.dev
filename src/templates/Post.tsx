@@ -1,11 +1,26 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import React, { useEffect } from "react"
+import { Link, graphql, navigate } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Seo from "components/seo"
 import "./Post.scss"
 
+const Mousetrap = require("mousetrap")
+
 const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
+  useEffect(() => {
+    Mousetrap.bind("left", () => {
+      if (previous) navigate(previous.fields.slug)
+    })
+    Mousetrap.bind("right", () => {
+      if (next) navigate(next.fields.slug)
+    })
+    return () => {
+      Mousetrap.unbind("left")
+      Mousetrap.unbind("right")
+    }
+  }, [location.key])
+
   return (
     <>
       <article
