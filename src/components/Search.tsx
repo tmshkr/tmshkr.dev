@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import algoliasearch from "algoliasearch/lite"
 import {
+  Configure,
   InstantSearch,
   SearchBox,
   Hits,
   Highlight,
+  Snippet,
   connectStateResults,
 } from "react-instantsearch-dom"
 import { Link } from "gatsby"
@@ -116,6 +118,10 @@ class SearchModal extends React.PureComponent<any, any> {
           className="flex flex-col bg-white dark:bg-slate-800 w-full sm:max-w-lg max-h-full sm:max-h-[90vh] mt-0 sm:mt-[5vh] mx-auto sm:rounded-lg shadow-lg"
         >
           <InstantSearch searchClient={searchClient} indexName="pages">
+            <Configure
+              attributesToSnippet={["content:30"]}
+              snippetEllipsisText="..."
+            />
             <div className="flex p-4">
               <SearchBox
                 autoFocus
@@ -152,7 +158,7 @@ function Hit({ hit }) {
       </h1>
       <p className="m-0">{hit.frontmatter.date}</p>
       <p>
-        <Highlight attribute="content" hit={hit} />
+        <Snippet attribute="content" hit={hit} />
       </p>
     </Link>
   )
