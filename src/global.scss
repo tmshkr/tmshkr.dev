@@ -33,3 +33,18 @@
     }
   }
 }
+
+.pagination {
+  li {
+    @apply mb-4;
+    span {
+      @apply bg-slate-400 p-1 rounded-md;
+      svg {
+        @apply w-4 inline fill-white;
+      }
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
