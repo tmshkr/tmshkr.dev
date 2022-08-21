@@ -136,7 +136,7 @@ class SearchModal extends React.PureComponent<any, any> {
             </div>
             <div ref={this.hitsRef} className="overflow-scroll px-4">
               <StateResults />
-              <Hits hitComponent={Hit} closeModal={this.props.closeModal} />
+              <Hits hitComponent={Hit} />
             </div>
           </InstantSearch>
         </div>
@@ -146,7 +146,6 @@ class SearchModal extends React.PureComponent<any, any> {
 }
 
 function Hit({ hit }) {
-  console.log(hit)
   return (
     <Link to={hit.fields.slug}>
       <h1 className="m-0">
