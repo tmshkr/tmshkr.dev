@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { Link, graphql, navigate } from "gatsby"
-
+import ArrowLeft from "@fortawesome/fontawesome-free/svgs/solid/arrow-left.svg"
+import ArrowRight from "@fortawesome/fontawesome-free/svgs/solid/arrow-right.svg"
 import Seo from "components/seo"
 import { getPathRoot } from "utils/path"
 
@@ -63,7 +64,7 @@ const PostIndex = ({ data, location, pageContext }) => {
         })}
       </ol>
       <hr />
-      <nav>
+      <nav className="pagination">
         <ul
           style={{
             display: `flex`,
@@ -76,14 +77,18 @@ const PostIndex = ({ data, location, pageContext }) => {
           <li>
             {nextPage && (
               <Link to={nextPage} rel="next">
-                ←
+                <span className="mr-2">
+                  <ArrowLeft />
+                </span>
               </Link>
             )}
           </li>
           <li>
             {prevPage && (
               <Link to={prevPage} rel="prev">
-                →
+                <span className="ml-2">
+                  <ArrowRight />
+                </span>
               </Link>
             )}
           </li>

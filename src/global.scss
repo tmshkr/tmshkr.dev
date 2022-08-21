@@ -33,3 +33,14 @@
     }
   }
 }
+
+.pagination {
+  li {
+    span {
+      @apply bg-slate-400 p-1 rounded-md;
+      svg {
+        @apply w-4 inline fill-white;
+      }
+    }
+  }
+}
