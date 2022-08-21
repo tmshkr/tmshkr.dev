@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "./src/components/SiteLayout"
 import "typeface-merriweather"
-import "./src/global.css"
+import "./src/global.scss"
 import "./src/tailwind.css"
 import "./src/code.scss"
 
