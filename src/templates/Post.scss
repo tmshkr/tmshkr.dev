@@ -1,5 +1,5 @@
 .Post {
   a {
-    @apply text-blue-600 dark:text-cyan-400 underline;
+    @apply text-blue-600 dark:text-cyan-400 hover:bg-blue-100 dark:hover:bg-cyan-800 underline;
   }
 }
