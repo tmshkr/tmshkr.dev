@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import { Link, graphql, navigate } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-
+import ArrowLeft from "@fortawesome/fontawesome-free/svgs/solid/arrow-left.svg"
+import ArrowRight from "@fortawesome/fontawesome-free/svgs/solid/arrow-right.svg"
 import Seo from "components/seo"
 import "./Post.scss"
 
@@ -41,19 +42,25 @@ const Post = ({ data: { previous, next, site, mdx: post }, location }) => {
         <MDXRenderer frontmatter={post.frontmatter}>{post.body}</MDXRenderer>
         <hr />
       </article>
-      <nav>
+      <nav className="pagination">
         <ul className="list-none p-0 m-0 mt-4 child:inline-block">
           <li className="mr-4">
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+                <span className="mr-2">
+                  <ArrowLeft />
+                </span>
+                {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li className="float-right">
             {next && (
               <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+                {next.frontmatter.title}{" "}
+                <span className="ml-2">
+                  <ArrowRight />
+                </span>
               </Link>
             )}
           </li>
