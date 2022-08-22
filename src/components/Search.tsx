@@ -74,13 +74,13 @@ export function Search({ location }) {
     <>
       <div className="flex items-center ml-auto">
         <button
-          className="dark:bg-slate-600 p-2 rounded-md"
+          className="bg-slate-300 dark:bg-slate-600 p-2 rounded-md"
           onClick={openModal}
         >
-          <SearchIcon className="w-5 inline mr-2 -mt-1" />
+          <SearchIcon className="w-5  inline mr-2 -mt-1" />
           Search{" "}
           {shortcut && (
-            <span className="hidden sm:inline bg-slate-500 rounded-md ml-2 p-1">
+            <span className="hidden sm:inline text-white bg-slate-400 rounded-md ml-2 p-1">
               {shortcut}
             </span>
           )}
@@ -134,7 +134,7 @@ class SearchModal extends React.PureComponent<any, any> {
                 }}
               />
               <button onClick={this.props.closeModal}>
-                <span className=" bg-slate-500 ml-2 p-2 rounded-[3px]">
+                <span className=" bg-slate-400 text-white ml-2 p-2 rounded-[3px]">
                   esc
                 </span>
               </button>
