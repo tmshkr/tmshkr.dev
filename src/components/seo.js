@@ -38,6 +38,7 @@ const Seo = ({ description, lang, title, children }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
+      <meta property="og:image" content="/tmshkr-com.png" />
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:creator"
