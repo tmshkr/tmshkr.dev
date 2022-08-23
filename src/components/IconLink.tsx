@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import "./IconLink.scss"
 
 import GitHub from "@fortawesome/fontawesome-free/svgs/brands/github.svg"
 
@@ -16,8 +17,7 @@ export const IconLink = ({ icon, text, to }) => {
   return isExternal ? (
     <a
       href={to}
-      style={{ textDecoration: "none" }}
-      className="whitespace-nowrap"
+      className="IconLink"
       title={text}
       target="_blank"
       rel="noopener noreferrer"
@@ -25,11 +25,7 @@ export const IconLink = ({ icon, text, to }) => {
       {icon} <span className="underline">{text}</span>
     </a>
   ) : (
-    <Link
-      to={to}
-      style={{ textDecoration: "none" }}
-      className="whitespace-nowrap"
-    >
+    <Link to={to} className="IconLink">
       {icon} <span className="underline">{text}</span>
     </Link>
   )
