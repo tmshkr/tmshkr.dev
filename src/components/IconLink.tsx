@@ -9,7 +9,7 @@ const icons = {
 }
 
 export const IconLink = ({ icon, text, to }) => {
-  const isExternal = to.startsWith("http")
+  const isExternal = /^http/.test(to)
   if (icon in icons) {
     icon = icons[icon]
   }
@@ -22,11 +22,11 @@ export const IconLink = ({ icon, text, to }) => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      {icon} <span className="underline">{text}</span>
+      {icon} <span>{text}</span>
     </a>
   ) : (
     <Link to={to} className="IconLink">
-      {icon} <span className="underline">{text}</span>
+      {icon} <span>{text}</span>
     </Link>
   )
 }

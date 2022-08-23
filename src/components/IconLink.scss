@@ -1,6 +1,9 @@
 .IconLink {
   @apply whitespace-nowrap;
   text-decoration: none !important;
+  span {
+    @apply underline;
+  }
   &:hover {
     background: transparent !important;
     span {
