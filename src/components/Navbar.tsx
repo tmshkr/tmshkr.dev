@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { MoonIcon, MenuIcon } from "@heroicons/react/outline"
+import HashnodeIcon from "@fortawesome/fontawesome-free/svgs/brands/hashnode.svg"
 import { Link, navigate, useStaticQuery, graphql } from "gatsby"
 import { Search } from "./Search"
 import { getPathRoot } from "utils/path"
@@ -27,6 +28,11 @@ export default function Navbar({ location }) {
     { slug: "about", label: "📖 about" },
     { slug: "blog", label: "📓 blog" },
     { slug: "projects", label: "💻 projects" },
+    {
+      href: "https://hashnode.tmshkr.dev/",
+      icon: <HashnodeIcon className="w-4 mr-1 -mt-1 inline fill-gray-400" />,
+      label: "hashnode",
+    },
   ]
 
   return (
@@ -52,20 +58,33 @@ export default function Navbar({ location }) {
                 >
                   tmshkr
                 </Link>
-                <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                  {navPaths.map(({ slug, label }) => (
-                    <Link
-                      to={`/${slug}`}
-                      key={slug}
-                      className={
-                        slug === pathRoot
-                          ? activeItemClasses
-                          : inactiveItemClasses
-                      }
-                    >
-                      {label}
-                    </Link>
-                  ))}
+                <div className="hidden sm:ml-6 sm:flex sm:space-x-3">
+                  {navPaths.map(({ href, icon, slug, label }) =>
+                    href ? (
+                      <a
+                        key={href}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferer"
+                        className={inactiveItemClasses}
+                      >
+                        {icon}
+                        {label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={`/${slug}`}
+                        key={slug}
+                        className={
+                          slug === pathRoot
+                            ? activeItemClasses
+                            : inactiveItemClasses
+                        }
+                      >
+                        {label}
+                      </Link>
+                    )
+                  )}
                 </div>
               </div>
               <Search {...{ location }} />
@@ -105,20 +124,34 @@ export default function Navbar({ location }) {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="pt-2 pb-3 space-y-1">
-                {navPaths.map(({ slug, label }) => (
-                  <Disclosure.Button
-                    as="a"
-                    key={`${slug}#mobile`}
-                    onClick={() => navigate(`/${slug}`)}
-                    className={
-                      slug === pathRoot
-                        ? activePathClassesMobile
-                        : inactivePathClassesMobile
-                    }
-                  >
-                    {label}
-                  </Disclosure.Button>
-                ))}
+                {navPaths.map(({ href, icon, slug, label }) =>
+                  href ? (
+                    <Disclosure.Button
+                      key={`${href}#mobile`}
+                      as="a"
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferer"
+                      className={inactivePathClassesMobile}
+                    >
+                      {icon}
+                      {label}
+                    </Disclosure.Button>
+                  ) : (
+                    <Disclosure.Button
+                      as="a"
+                      key={`${slug}#mobile`}
+                      onClick={() => navigate(`/${slug}`)}
+                      className={
+                        slug === pathRoot
+                          ? activePathClassesMobile
+                          : inactivePathClassesMobile
+                      }
+                    >
+                      {label}
+                    </Disclosure.Button>
+                  )
+                )}
               </div>
             </Disclosure.Panel>
           </>
