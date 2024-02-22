@@ -3,9 +3,7 @@
       "codespaces": {
         "repositories": {
           "tmshkr/tmshkr.com-content": {
-            "permissions": {
-              "contents": "write"
-            }
+            "permissions": "write-all"
           }
         }
       }
